@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 var authors = express(".authors.js");
 
-///exercice 01 home office
+///exercice-01
 
 app.get("/",(req, res)=>{
     res.send("Authors API");
@@ -10,7 +10,7 @@ app.get("/",(req, res)=>{
 
 
 
-///exercice 02 ruets auteures 
+///exercice_02
 
 app.get("/authors/:authorId/books/",(req,res) => {
     let authorId = req.params.authorId;
@@ -19,7 +19,7 @@ app.get("/authors/:authorId/books/",(req,res) => {
 });
 
 
-/// exercice 03 routes livres
+/// exercice_03
 
 app.get("/authors/:authorId/books/", (req,res) => {
     let authorId = req.params.authorId;
@@ -27,7 +27,7 @@ app.get("/authors/:authorId/books/", (req,res) => {
     res.send('${author.books.join(",")}');
 });
 
-////exercice 04 routes json
+////exercice_04
 app.get("/json/authors/:id",(req,res) => {
     let id =res.params.id;
     let author = authors[id -1];
