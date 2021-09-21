@@ -1,34 +1,45 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
+const PORT = 3000;
 
-const PORT = 3001;
-// students
-const students =[{name:"assad"},{name:Andy},{name:Yangchen}];
+const students = [{ name: "Asaad" }, { name: "elodie" }];
+
+// "parser" le body
 app.use(express.json());
-app.use(cors());
-// 
-app.get((req,res,next) =>{
-console.log("yes");
-next();
+
+app.use((req, res, next) => {
+	if (req.body.name.length < 5) {
+		// Return pour éviter de déclencher le next()
+		return res.json({
+			status: "error",
+			message: "Name cannot be less than 5 characters",
+		});
+	}
+	next();
 });
 
-// Route
-app.get("/students", (req,res) =>{
-    res.json({
-        students,
-    });
-});
-app.post("/studants", (req, res) => {
-    const newStudents = req.body;
-    console.log(newStudents);
-    res.json({
-        message: "this is one studant",
-        newStudents,
-    });
+// Par convention, il n'y a aucun verbe dans les URLs
+app.get("/students", (req, res) => {
+	res.json({
+		status: "OK",
+		data: students,
+	});
 });
 
-/// listening serveur
-app.listen(PORT,() =>{
-    console.log('Listening on port ${PORT}');
+app.post("/students", (req, res) => {
+	const newStudent = req.body;
+	newStudent.id = Math.floor(Math.random() * 10);
+	newStudent.created = new Date();
+
+	students.push(newStudent);
+
+	res.json({
+		status: "OK",
+		message: "Student added successfully :)",
+		data: newStudent,
+	});
+});
+
+app.listen(PORT, () => {
+	console.log(`Server listening on port ${PORT}`);
 });

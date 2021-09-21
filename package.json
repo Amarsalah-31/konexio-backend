@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jest": "^27.2.1",
+    "model": "^6.0.1",
+    "mongoose": "^6.0.5",
+    "nodemon": "^2.0.12"
   },
   "devDependencies": {},
   "scripts": {
